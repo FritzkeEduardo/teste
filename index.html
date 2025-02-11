@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de LEDs</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        h2 { color: #333; }
+        .button { padding: 10px 20px; font-size: 18px; margin: 10px; cursor: pointer; border: none; border-radius: 5px; }
+        .on { background-color: green; color: white; }
+        .off { background-color: red; color: white; }
+    </style>
+    <script>
+        function sendCommand(command) {
+            fetch("http://192.168.2.6"/ + command)  // Substituir pelo IP do ESP32
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Erro:', error));
+        }
+    </script>
+</head>
+<body>
+    <h2>Controle de LEDs</h2>
+    <p><button class="button on" onclick="sendCommand('/led1/on')">Ligar LED 1</button>
+    <button class="button off" onclick="sendCommand('/led1/off')">Desligar LED 1</button></p>
+
+    <p><button class="button on" onclick="sendCommand('/led2/on')">Ligar LED 2</button>
+    <button class="button off" onclick="sendCommand('/led2/off')">Desligar LED 2</button></p>
+</body>
+</html>
